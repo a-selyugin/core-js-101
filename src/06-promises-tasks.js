@@ -106,14 +106,10 @@ async function chainPromises(array, action) {
   const responses = [];
   const finProm = new Promise((resolve) => {
     array.forEach(async (prom, i) => {
-      try {
-        const res = await prom;
-        responses.push(res);
-        if (array.length - 1 === i) {
-          resolve(responses);
-        }
-      } catch (err) {
-        console.log(err);
+      const res = await prom;
+      responses.push(res);
+      if (array.length - 1 === i) {
+        resolve(responses);
       }
     });
   });

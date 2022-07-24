@@ -157,8 +157,9 @@ function retry(func, attempts) {
 function logger(func, logFunc) {
   return (...args) => {
     logFunc(func.name.concat('(').concat(args.map((i) => JSON.stringify(i))).concat(') starts'));
+    const res = func.apply(this, args);
     logFunc(func.name.concat('(').concat(args.map((i) => JSON.stringify(i))).concat(') ends'));
-    return func.apply(this, args);
+    return res;
   };
 }
 
